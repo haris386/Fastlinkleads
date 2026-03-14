@@ -5,6 +5,16 @@ import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
 
 export default function Footer() {
+  const middleLinks = [
+    { name: "About", href: "/about-us" },
+    { name: "Services", href: "/services" },
+    { name: "Industries", href: "/industries" },
+    { name: "Tips", href: "/tips" },
+    { name: "Training Videos", href: "/training-videos" },
+    { name: "Reviews", href: "/reviews" },
+    { name: "Contact", href: "/contact" },
+  ];
+
   return (
     <section className="w-full bg-[#fafafa] text-gray-800 pt-12">
       <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col lg:flex-row justify-between gap-10">
@@ -25,13 +35,13 @@ export default function Footer() {
 
         {/* MIDDLE COL */}
         <div className="flex flex-col gap-3 lg:w-1/4">
-          {["About","Services","Industries","Tips","Training Videos","Reviews","Contact"].map((item) => (
+          {middleLinks.map((link) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase().replace(/\s+/g,"-")}`}
+              key={link.name}
+              href={link.href}
               className="hover:text-[#0858af] transition-colors duration-300"
             >
-              {item}
+              {link.name}
             </Link>
           ))}
         </div>

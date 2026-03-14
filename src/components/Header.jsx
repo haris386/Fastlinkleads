@@ -9,19 +9,18 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
-    "About",
-    "Services",
-    "Industries",
-    "Tips",
-    "Training Videos",
-    "Reviews",
-    "Contact",
-    "Packages",
+    { label: "About", href: "/about-us" },
+    { label: "Services", href: "/services" },
+    { label: "Industries", href: "/industries" },
+    { label: "Tips", href: "/tips" },
+    { label: "Training Videos", href: "/training-videos" },
+    { label: "Reviews", href: "/reviews" },
+    { label: "Contact", href: "/contact" },
+    { label: "Packages", href: "/packages" },
   ];
 
   return (
     <header className="w-full flex justify-center bg-white">
-      
       <div className="w-[90%] flex items-center justify-between py-4">
 
         {/* Logo */}
@@ -40,11 +39,11 @@ export default function Header() {
 
           {menuItems.map((item) => (
             <Link
-              key={item}
-              href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+              key={item.label}
+              href={item.href}
               className="text-[#004188] font-medium px-3 py-1 border border-transparent rounded-[5px] hover:border-[#004188] transition-all duration-300 ease-in-out"
             >
-              {item}
+              {item.label}
             </Link>
           ))}
 
@@ -66,17 +65,15 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="absolute top-[70px] left-0 w-full bg-white shadow-lg lg:hidden">
-
           <div className="flex flex-col items-center py-6 gap-6">
-
             {menuItems.map((item) => (
               <Link
-                key={item}
-                href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                key={item.label}
+                href={item.href}
                 onClick={() => setMenuOpen(false)}
                 className="text-gray-700 text-lg font-medium"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
 
@@ -87,12 +84,9 @@ export default function Header() {
               <FiShoppingCart />
               Cart
             </Link>
-
           </div>
-
         </div>
       )}
-
     </header>
   );
 }
