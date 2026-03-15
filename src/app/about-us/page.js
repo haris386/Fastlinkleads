@@ -56,12 +56,12 @@ export default function AboutUsPage() {
       <section className="w-full flex justify-center py-16">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
           {/* Heading */}
-          <h1 className="text-[48px] font-bold text-[#004188] text-center">
+          <h1 className="text-[35px] font-bold text-[#004188] text-center">
             About Us
           </h1>
 
           {/* Typewriter Text */}
-          <h2 className="text-[48px] lg:text-[60px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
             {text}
             <span className="animate-pulse">|</span>
           </h2>
@@ -72,7 +72,7 @@ export default function AboutUsPage() {
       <section className="w-full bg-[#014188] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%] text-center">
           {/* Heading */}
-          <h2 className="text-4xl font-bold text-white mt-16 mb-6">
+          <h2 className="text-[35px] font-bold text-white mt-16 mb-6">
             Who We Are
           </h2>
 
@@ -91,7 +91,7 @@ export default function AboutUsPage() {
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[80%]">
           {/* Heading */}
-          <h2 className="text-4xl font-bold text-center text-[#024289] mt-16 mb-16">
+          <h2 className="text-[35px] font-bold text-center text-[#024289] mt-16 mb-16">
             How to work with us
           </h2>
 
@@ -144,7 +144,7 @@ export default function AboutUsPage() {
         <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* LEFT COL */}
           <div className="text-white text-center lg:text-left lg:w-2/3">
-            <h2 className="text-4xl font-bold mb-4">
+            <h2 className="text-[35px] font-bold mb-4">
               We’re Waiting To Help You
             </h2>
             <p className="text-[16px] lg:text-[18px] leading-relaxed">

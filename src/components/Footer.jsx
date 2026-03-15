@@ -12,25 +12,33 @@ export default function Footer() {
     { name: "Tips", href: "/tips" },
     { name: "Training Videos", href: "/training-videos" },
     { name: "Reviews", href: "/reviews" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact", href: "/contact-us" },
   ];
 
   return (
     <section className="w-full bg-[#fafafa] text-gray-800 pt-12">
       <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col lg:flex-row justify-between gap-10">
-
         {/* LEFT COL */}
         <div className="flex flex-col gap-4 lg:w-1/2">
-          <Image
-            src="/logos/fastlinkleads.png"
-            alt="Fastlink Leads"
-            width={250}
-            height={70}
-            priority
-          />
-          <p><span className="font-bold">Company Phone #</span>: 844-884-5323</p>
-          <p><span className="font-bold">Support Email</span>: support@fastlinkleads.com</p>
-          <p><span className="font-bold">Main Office</span>: Newark, DE</p>
+          <Link href="/">
+            <Image
+              src="/logos/fastlinkleads.png"
+              alt="Fastlink Leads"
+              width={250}
+              height={70}
+              priority
+            />
+          </Link>
+          <p>
+            <span className="font-bold">Company Phone #</span>: 844-884-5323
+          </p>
+          <p>
+            <span className="font-bold">Support Email</span>:
+            support@fastlinkleads.com
+          </p>
+          <p>
+            <span className="font-bold">Main Office</span>: Newark, DE
+          </p>
         </div>
 
         {/* MIDDLE COL */}
@@ -62,7 +70,6 @@ export default function Footer() {
             Cart
           </Link>
         </div>
-
       </div>
 
       {/* SEPARATOR LINE */}
@@ -70,14 +77,19 @@ export default function Footer() {
 
       {/* TERMS AND COPYRIGHT */}
       <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col items-center gap-4 py-6 text-gray-600 text-sm">
-
         {/* Links */}
         <div className="flex gap-4">
-          <Link href="/terms" className="hover:text-[#0858af] transition-colors duration-300">
+          <Link
+            href="/terms"
+            className="hover:text-[#0858af] transition-colors duration-300"
+          >
             Terms of Use
           </Link>
           <span>|</span>
-          <Link href="/privacy" className="hover:text-[#0858af] transition-colors duration-300">
+          <Link
+            href="/privacy"
+            className="hover:text-[#0858af] transition-colors duration-300"
+          >
             Privacy Policy
           </Link>
         </div>

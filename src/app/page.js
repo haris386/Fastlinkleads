@@ -3,7 +3,13 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Image from "next/image";
-import { FaUserCheck, FaPhoneAlt, FaSms, FaShareAlt, FaArrowUp } from "react-icons/fa";
+import {
+  FaUserCheck,
+  FaPhoneAlt,
+  FaSms,
+  FaShareAlt,
+  FaArrowUp,
+} from "react-icons/fa";
 import Footer from "@/components/Footer";
 
 export default function Home() {

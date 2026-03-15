@@ -15,8 +15,8 @@ export default function Header() {
     { label: "Tips", href: "/tips" },
     { label: "Training Videos", href: "/training-videos" },
     { label: "Reviews", href: "/reviews" },
-    { label: "Contact", href: "/contact" },
-    { label: "Packages", href: "/packages" },
+    { label: "Contact", href: "/contact-us" },
+    { label: "Packages", href: "/shop" },
   ];
 
   return (
@@ -41,7 +41,7 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-[#004188] font-medium px-3 py-1 border border-transparent rounded-[5px] hover:border-[#004188] transition-all duration-300 ease-in-out"
+              className="text-[#1465bc] font-medium px-3 py-2 border border-transparent rounded-[10px] hover:border-[#1465bc] transition-all duration-300 ease-in-out"
             >
               {item.label}
             </Link>

@@ -10,6 +10,7 @@ import {
   FaArrowUp,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 
 export default function ServicesPage() {
   const words = [
@@ -19,9 +20,16 @@ export default function ServicesPage() {
     "SMS Marketing",
   ];
 
+  const words2 = [
+    "Quick Contact",
+  ];
+
   const [text, setText] = useState("");
+  const [text2, setText2] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+  const [wordIndex2, setWordIndex2] = useState(0);
+  const [charIndex2, setCharIndex2] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
@@ -40,6 +48,23 @@ export default function ServicesPage() {
       }, 1500);
     }
   }, [charIndex, wordIndex]);
+
+  useEffect(() => {
+    if (charIndex2 < words2[wordIndex2].length) {
+      const timeout = setTimeout(() => {
+        setText2((prev) => prev + words2[wordIndex2][charIndex2]);
+        setCharIndex2((prev) => prev + 1);
+      }, 60);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setTimeout(() => {
+        setText2("");
+        setCharIndex2(0);
+        setWordIndex2((prev) => (prev + 1) % words2.length);
+      }, 1500);
+    }
+  }, [charIndex2, wordIndex2]);
 
   // Scroll listener for Back to Top button
   useEffect(() => {
@@ -67,12 +92,12 @@ export default function ServicesPage() {
       <section className="w-full flex justify-center py-16">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
           {/* Heading */}
-          <h1 className="text-[48px] font-bold text-[#004188] text-center">
+          <h1 className="text-[35px] font-bold text-[#004188] text-center">
             Providing quality services with expert care.
           </h1>
 
           {/* Typewriter Text */}
-          <h2 className="text-[48px] lg:text-[60px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
             {text}
             <span className="animate-pulse">|</span>
           </h2>
@@ -138,7 +163,9 @@ export default function ServicesPage() {
               <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
                 <FaEnvelope />
               </div>
-              <h3 className="text-[30px] font-semibold mb-8">Email Marketing</h3>
+              <h3 className="text-[30px] font-semibold mb-8">
+                Email Marketing
+              </h3>
               <p className="text-[#00cb75] text-[18px] leading-relaxed mb-8">
                 When your goal is mass marketing, Email is a go-to inexpensive
                 and simple outreach program.
@@ -181,8 +208,28 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      
-       {/* CTA SECTION */}
+
+      {/* CONTACT FORM SECTION */}
+      <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
+        <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-6">
+          {/* Heading */}
+          <h2 className="text-[35px] font-bold text-[#004188] text-center">
+            Send Us A Message
+          </h2>
+
+          {/* Typewriter Heading */}
+          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+            {text2}
+            <span className="animate-pulse">|</span>
+          </h2>
+
+          {/* Contact Form Component */}
+          <div className="w-full mt-6">
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+      {/* CTA SECTION */}
       <section className="w-full bg-[#0858af] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* LEFT COL */}
