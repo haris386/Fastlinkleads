@@ -3,8 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
+import { usePathname } from "next/navigation"; // <-- import usePathname
 
 export default function Footer() {
+  const pathname = usePathname(); // current route
+
   const middleLinks = [
     { name: "About", href: "/about-us" },
     { name: "Services", href: "/services" },
@@ -33,8 +36,7 @@ export default function Footer() {
             <span className="font-bold">Company Phone #</span>: 844-884-5323
           </p>
           <p>
-            <span className="font-bold">Support Email</span>:
-            support@fastlinkleads.com
+            <span className="font-bold">Support Email</span>: support@fastlinkleads.com
           </p>
           <p>
             <span className="font-bold">Main Office</span>: Newark, DE
@@ -47,7 +49,9 @@ export default function Footer() {
             <Link
               key={link.name}
               href={link.href}
-              className="hover:text-[#0858af] transition-colors duration-300"
+              className={`transition-colors duration-300 hover:text-[#0858af] ${
+                pathname === link.href ? "text-[#00ca72]" : ""
+              }`} // active link green
             >
               {link.name}
             </Link>
@@ -58,13 +62,17 @@ export default function Footer() {
         <div className="flex flex-col gap-3 lg:w-1/4">
           <Link
             href="/packages"
-            className="hover:text-[#0858af] transition-colors duration-300"
+            className={`transition-colors duration-300 hover:text-[#0858af] ${
+              pathname === "/packages" ? "text-[#00ca72]" : ""
+            }`}
           >
             Packages
           </Link>
           <Link
             href="/cart"
-            className="flex items-center gap-2 hover:text-[#0858af] transition-colors duration-300"
+            className={`flex items-center gap-2 transition-colors duration-300 hover:text-[#0858af] ${
+              pathname === "/cart" ? "text-[#00ca72]" : ""
+            }`}
           >
             <FiShoppingCart />
             Cart
@@ -77,24 +85,26 @@ export default function Footer() {
 
       {/* TERMS AND COPYRIGHT */}
       <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col items-center gap-4 py-6 text-gray-600 text-sm">
-        {/* Links */}
         <div className="flex gap-4">
           <Link
             href="/terms"
-            className="hover:text-[#0858af] transition-colors duration-300"
+            className={`transition-colors duration-300 hover:text-[#0858af] ${
+              pathname === "/terms" ? "text-[#00ca72]" : ""
+            }`}
           >
             Terms of Use
           </Link>
           <span>|</span>
           <Link
             href="/privacy"
-            className="hover:text-[#0858af] transition-colors duration-300"
+            className={`transition-colors duration-300 hover:text-[#0858af] ${
+              pathname === "/privacy" ? "text-[#00ca72]" : ""
+            }`}
           >
             Privacy Policy
           </Link>
         </div>
 
-        {/* Copyright */}
         <p>© Copyright 2012–2026</p>
       </div>
     </section>
