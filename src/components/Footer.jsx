@@ -87,18 +87,18 @@ export default function Footer() {
       <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col items-center gap-4 py-6 text-gray-600 text-sm">
         <div className="flex gap-4">
           <Link
-            href="/terms"
+            href="/terms-of-use"
             className={`transition-colors duration-300 hover:text-[#0858af] ${
-              pathname === "/terms" ? "text-[#00ca72]" : ""
+              pathname === "/terms-of-use" ? "text-[#00ca72]" : ""
             }`}
           >
             Terms of Use
           </Link>
           <span>|</span>
           <Link
-            href="/privacy"
+            href="/privacy-policy"
             className={`transition-colors duration-300 hover:text-[#0858af] ${
-              pathname === "/privacy" ? "text-[#00ca72]" : ""
+              pathname === "/privacy-policy" ? "text-[#00ca72]" : ""
             }`}
           >
             Privacy Policy
