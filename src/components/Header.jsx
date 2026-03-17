@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,24 +20,40 @@ export default function Header() {
     { label: "Packages", href: "/shop" },
   ];
 
+  const leftVariant = {
+    hidden: { x: -50, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 60, damping: 12 } },
+  };
+
+  const rightVariant = {
+    hidden: { x: 50, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { type: "spring", stiffness: 60, damping: 12, delay: 0.2 } },
+  };
+
   return (
-    <header className="w-full flex justify-center bg-white">
+    <header className="w-full flex justify-center bg-white relative z-50 overflow-x-hidden">
       <div className="w-[90%] flex items-center justify-between py-4">
 
         {/* Logo */}
-        <Link href="/">
-          <Image
-            src="/logos/fastlinkleads.png"
-            alt="Fastlink Leads"
-            width={200}
-            height={40}
-            priority
-          />
-        </Link>
+        <motion.div variants={leftVariant} initial="hidden" animate="visible">
+          <Link href="/">
+            <Image
+              src="/logos/fastlinkleads.png"
+              alt="Fastlink Leads"
+              width={200}
+              height={40}
+              priority
+            />
+          </Link>
+        </motion.div>
 
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-2">
-
+        <motion.nav
+          className="hidden lg:flex items-center gap-2"
+          variants={rightVariant}
+          initial="hidden"
+          animate="visible"
+        >
           {menuItems.map((item) => (
             <Link
               key={item.label}
@@ -51,27 +68,30 @@ export default function Header() {
           <Link href="/cart">
             <FiShoppingCart size={22} />
           </Link>
-        </nav>
+        </motion.nav>
 
         {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden"
+        <motion.button
+          className="lg:hidden z-50"
           onClick={() => setMenuOpen(!menuOpen)}
+          variants={rightVariant}
+          initial="hidden"
+          animate="visible"
         >
           {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
-        </button>
+        </motion.button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-[70px] left-0 w-full bg-white shadow-lg lg:hidden">
+        <div className="fixed z-10 top-[70px] left-0 w-full bg-white shadow-lg lg:hidden">
           <div className="flex flex-col items-center py-6 gap-6">
             {menuItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-gray-700 text-lg font-medium"
+                className="text-gray-700 text-lg font-medium text-center"
               >
                 {item.label}
               </Link>
@@ -79,7 +99,8 @@ export default function Header() {
 
             <Link
               href="/cart"
-              className="flex items-center gap-2 text-lg"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 text-lg text-center"
             >
               <FiShoppingCart />
               Cart
