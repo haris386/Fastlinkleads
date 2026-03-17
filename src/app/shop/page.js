@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { supabase } from "@/lib/supabase";
 import { FaShoppingCart, FaArrowUp } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,42 +13,38 @@ export default function ShopPage() {
   const [sortBy, setSortBy] = useState("default");
   const [order, setOrder] = useState("asc");
   const [showCount, setShowCount] = useState(12);
-
-  const packages = [
-    {
-      title: "10 Appointments",
-      price: 1000,
-      image: "/images/10App.jpg",
-      date: 1,
-      popularity: 2,
-    },
-    {
-      title: "25 Appointments",
-      price: 2375,
-      image: "/images/20App.jpg",
-      date: 2,
-      popularity: 3,
-    },
-    {
-      title: "35 Appointments",
-      price: 3200,
-      image: "/images/30App.jpg",
-      date: 3,
-      popularity: 1,
-    },
-  ];
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
+      setShowTopBtn(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      const { data, error } = await supabase.from("packages").select("*");
+
+      if (error) {
+        console.error("Error fetching packages:", error);
+        return;
+      }
+
+      // Map local images based on slug
+      const packagesWithImages = data.map((pkg) => {
+        let imageUrl = "/images/placeholder.jpg"; // fallback
+        if (pkg.slug === "10-appointments") imageUrl = "/images/10App.jpg";
+        if (pkg.slug === "25-appointments") imageUrl = "/images/25App.jpg";
+        if (pkg.slug === "35-appointments") imageUrl = "/images/35App.jpg";
+        return { ...pkg, image_url: imageUrl };
+      });
+
+      setPackages(packagesWithImages);
+    };
+
+    fetchPackages();
   }, []);
 
   const scrollToTop = () => {
@@ -56,12 +53,8 @@ export default function ShopPage() {
 
   const sortedPackages = [...packages].sort((a, b) => {
     let result = 0;
-
     if (sortBy === "name") result = a.title.localeCompare(b.title);
     if (sortBy === "price") result = a.price - b.price;
-    if (sortBy === "date") result = a.date - b.date;
-    if (sortBy === "popularity") result = a.popularity - b.popularity;
-
     return order === "asc" ? result : -result;
   });
 
@@ -75,7 +68,6 @@ export default function ShopPage() {
           <h1 className="text-[40px] font-bold text-[#004188] text-center">
             Packages
           </h1>
-
           <div className="text-gray-600 text-[16px]">
             <Link href="/" className="hover:text-[#0858af]">
               Home
@@ -122,6 +114,7 @@ export default function ShopPage() {
               <option value={36}>Show 36 Products</option>
             </select>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {sortedPackages.slice(0, showCount).map((pkg, index) => (
               <div
@@ -131,7 +124,7 @@ export default function ShopPage() {
                 {/* Image */}
                 <div className="w-full h-[220px] relative">
                   <Image
-                    src={pkg.image}
+                    src={pkg.image_url}
                     alt={pkg.title}
                     fill
                     className="object-cover"
@@ -143,9 +136,8 @@ export default function ShopPage() {
                   <h3 className="text-[22px] font-semibold text-[#004188]">
                     {pkg.title}
                   </h3>
-
                   <p className="text-[20px] font-bold text-[#0e6ace]">
-                    ${pkg.price.toLocaleString()}.00
+                    ${Number(pkg.price).toLocaleString()}.00
                   </p>
 
                   {/* Buttons Row */}
@@ -156,7 +148,7 @@ export default function ShopPage() {
                     </button>
 
                     <Link
-                      href="/contact"
+                      href={`/product/${pkg.slug}`}
                       className="text-[#0858af] font-semibold hover:underline"
                     >
                       Details
