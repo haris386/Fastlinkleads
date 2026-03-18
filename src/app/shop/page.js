@@ -8,6 +8,7 @@ import { FaShoppingCart, FaArrowUp } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useCartStore } from "@/store/cartStore";
 
 export default function ShopPage() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -15,6 +16,8 @@ export default function ShopPage() {
   const [order, setOrder] = useState("asc");
   const [showCount, setShowCount] = useState(12);
   const [packages, setPackages] = useState([]);
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -159,7 +162,18 @@ export default function ShopPage() {
 
                   {/* Buttons Row */}
                   <div className="w-full flex justify-between items-center mt-4">
-                    <button className="flex items-center gap-2 bg-[#00cb75] text-white px-4 py-2 rounded-md hover:opacity-90 transition">
+                    <button
+                      onClick={() =>
+                        addToCart({
+                          id: pkg.id,
+                          title: pkg.title,
+                          price: pkg.price,
+                          slug: pkg.slug,
+                          image: pkg.image_url,
+                        })
+                      }
+                      className="flex items-center gap-2 bg-[#00cb75] text-white px-4 py-2 rounded-md hover:opacity-90 transition"
+                    >
                       <FaShoppingCart />
                       Add to cart
                     </button>

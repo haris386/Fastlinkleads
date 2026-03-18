@@ -17,9 +17,9 @@ export default function ProductDetailPage() {
   const [pkg, setPkg] = useState(null);
   const [relatedPkgs, setRelatedPkgs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(0);
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { items, addToCart, increment, decrement } = useCartStore();
 
+  const cartItem = items.find((item) => item.id === pkg?.id);
   // Function to map slugs to images
   const mapImageBySlug = (pkg) => {
     let imageUrl = "/images/placeholder.png"; // default fallback
@@ -92,7 +92,9 @@ export default function ProductDetailPage() {
 
           {/* Right Column - Info */}
           <div className="w-full lg:w-1/2 flex flex-col gap-4">
-            <h1 className="text-[32px] font-bold text-[#004188]">{pkg.title}</h1>
+            <h1 className="text-[32px] font-bold text-[#004188]">
+              {pkg.title}
+            </h1>
             <p className="text-[24px] font-bold text-[#0e6ace]">
               ${Number(pkg.price).toLocaleString()}.00
             </p>
@@ -108,41 +110,47 @@ export default function ProductDetailPage() {
             </ul>
 
             {/* Quantity + Add to Cart */}
-            <div className="flex items-center justify-between mt-4">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() =>
-                    setQuantity((prev) => (prev > 0 ? prev - 1 : 0))
-                  }
-                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                >
-                  -
-                </button>
-                <span className="px-4 py-1 border rounded">{quantity}</span>
-                <button
-                  onClick={() => setQuantity((prev) => prev + 1)}
-                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-                >
-                  +
-                </button>
-              </div>
+           <div className="flex items-center gap-4 mt-4">
 
-              <button
-                onClick={() =>
-                  addToCart({
-                    id: pkg.id,
-                    title: pkg.title,
-                    price: pkg.price,
-                    slug: pkg.slug,
-                    quantity: quantity || 1,
-                  })
-                }
-                className="flex items-center gap-2 bg-[#00cb75] text-white px-6 py-3 rounded-md hover:opacity-90 transition"
-              >
-                <FaShoppingCart />
-                Add to Cart
-              </button>
-            </div>
+  {/* ➖ Quantity Controls */}
+  <div className="flex items-center gap-2">
+    <button
+      onClick={() => decrement(pkg.id)}
+      className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+    >
+      -
+    </button>
+
+    <span className="px-4 py-1 border rounded">
+      {cartItem ? cartItem.quantity : 0}
+    </span>
+
+    <button
+      onClick={() => increment(pkg.id)}
+      className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+    >
+      +
+    </button>
+  </div>
+
+  {/* 🛒 Add to Cart ALWAYS visible */}
+  <button
+    onClick={() =>
+      addToCart({
+        id: pkg.id,
+        title: pkg.title,
+        price: pkg.price,
+        slug: pkg.slug,
+        image: pkg.image_url,
+      })
+    }
+    className="flex items-center gap-2 bg-[#00cb75] text-white px-6 py-3 rounded-md hover:opacity-90 transition"
+  >
+    <FaShoppingCart />
+    Add to Cart
+  </button>
+
+</div>
           </div>
         </div>
       </section>
