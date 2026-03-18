@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import { FaQuoteLeft, FaArrowUp } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function ReviewsPage() {
   const words = ["Respected", "Trusted", "Dependable"];
@@ -70,66 +72,118 @@ export default function ReviewsPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const cardLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15 },
+    },
+  };
+
+  const cardUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.2 },
+    },
+  };
+
+  const cardRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.4 },
+    },
+  };
+
   return (
     <main>
       <Header />
 
       {/* HERO SECTION */}
 
-      <section className="w-full flex justify-center py-16">
-        <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
-          {/* Heading */}
-          <h1 className="text-[35px] font-bold text-[#004188] text-center">
-            Reviews
-          </h1>
+      <motion.div
+        className="flex flex-col text-white"
+        variants={cardUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <section className="w-full flex justify-center py-16">
+          <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
+            {/* Heading */}
+            <h1 className="text-[35px] font-bold text-[#004188] text-center">
+              Reviews
+            </h1>
 
-          {/* Typewriter Text */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text}
-            <span className="animate-pulse">|</span>
-          </h2>
-          <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
-            GET STARTED
-          </button>
-        </div>
-      </section>
+            {/* Typewriter Text */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text}
+              <span className="animate-pulse">|</span>
+            </h2>
+                        <Link href="/shop">
+            <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+              GET STARTED
+            </button>
+            </Link>
 
+          </div>
+        </section>
+      </motion.div>
       {/* WHAT WE DO SECTION */}
 
       <section className="w-full bg-[#014188] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* TESTIMONIAL 1 */}
-            <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-8">
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-                <FaQuoteLeft />
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-8">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaQuoteLeft />
+                </div>
+                <h3 className="text-[26px] font-semibold mb-6">
+                  Business is a lot more reliable with a good leads provider. I
+                  just moved with my family to a new state, but I’m still able
+                  to be a self-employed carpsenter.{" "}
+                </h3>
+
+                <p className="text-[#00cb75] text-[18px] leading-relaxed mb-6">
+                  John (Anonymous), Independent Carpenter
+                </p>
               </div>
-              <h3 className="text-[26px] font-semibold mb-6">
-                Business is a lot more reliable with a good leads provider. I
-                just moved with my family to a new state, but I’m still able to
-                be a self-employed carpsenter.{" "}
-              </h3>
-
-              <p className="text-[#00cb75] text-[18px] leading-relaxed mb-6">
-                John (Anonymous), Independent Carpenter
-              </p>
-            </div>
-
+            </motion.div>
             {/* TESTIMONIAL 2 */}
-            <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-8">
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-                <FaQuoteLeft />
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-8">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaQuoteLeft />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">
+                  I’m happy to work with Fast Link. They’ve made a package with
+                  my needs in mind, so I have no compromises.
+                </h3>
+
+                <p className="text-[#00cb75] text-[18px] leading-relaxed mb-6">
+                  Joseph DeLancey, Roofing Manager
+                </p>
               </div>
-
-              <h3 className="text-[26px] font-semibold mb-6">
-                I’m happy to work with Fast Link. They’ve made a package with my
-                needs in mind, so I have no compromises.
-              </h3>
-
-              <p className="text-[#00cb75] text-[18px] leading-relaxed mb-6">
-                Joseph DeLancey, Roofing Manager
-              </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -137,28 +191,51 @@ export default function ReviewsPage() {
       {/* CONTACT FORM SECTION */}
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-6">
-          {/* Heading */}
-          <h2 className="text-[35px] font-bold text-[#004188] text-center">
-            Send Us A Message
-          </h2>
-
-          {/* Typewriter Heading */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text2}
-            <span className="animate-pulse">|</span>
-          </h2>
+          <motion.div
+            className="flex flex-col text-white"
+            variants={cardLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Heading */}
+            <h2 className="text-[35px] font-bold text-[#004188] text-center">
+              Send Us A Message
+            </h2>
+            {/* Typewriter Heading */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text2}
+              <span className="animate-pulse">|</span>
+            </h2>
+          </motion.div>
 
           {/* Contact Form Component */}
           <div className="w-full mt-6">
-            <ContactForm />
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <ContactForm />
+            </motion.div>
           </div>
         </div>
       </section>
       {/* CTA SECTION */}
-      <section className="w-full bg-[#0858af] py-20 flex justify-center">
+      <motion.section
+        className="w-full bg-[#0858af] py-20 flex justify-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* LEFT COL */}
-          <div className="text-white text-center lg:text-left lg:w-2/3">
+          <motion.div
+            className="text-white text-center lg:text-left lg:w-2/3"
+            variants={cardUp}
+          >
             <h2 className="text-4xl font-bold mb-4">
               We’re Waiting To Help You
             </h2>
@@ -166,16 +243,21 @@ export default function ReviewsPage() {
               Get in touch with us today and let’s start transforming your
               business from the ground up.
             </p>
-          </div>
+          </motion.div>
 
           {/* RIGHT COL */}
-          <div className="lg:w-1/3 flex justify-center">
-            <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
-              GET STARTED
-            </button>
-          </div>
+          <motion.div
+            className="lg:w-1/3 flex justify-center"
+            variants={cardUp}
+          >
+           <Link href="/shop">
+              <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
+                GET STARTED
+              </button>
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
 

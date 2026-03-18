@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function TermsOfUsePage() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -25,11 +26,27 @@ export default function TermsOfUsePage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const cardUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.2 },
+    },
+  };
+
   return (
     <main>
       <Header />
 
       {/* HERO */}
+       <motion.div
+              className="flex flex-col text-white"
+              variants={cardUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
       <section className="w-full bg-[#f6fafd] py-16 flex justify-center">
         <div className="w-[90%] lg:w-[70%] text-center">
           <h1 className="text-4xl font-bold text-[#004188] mb-4">
@@ -445,7 +462,7 @@ export default function TermsOfUsePage() {
           </div>
         </div>
       </section>
-
+</motion.div>
       <Footer />
 
       {/* BACK TO TOP BUTTON */}

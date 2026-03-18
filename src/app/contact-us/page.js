@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { FaQuoteLeft, FaArrowUp } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { motion } from "framer-motion";
 
 export default function ContactUsPage() {
   const words = ["We’re Here To Help"];
@@ -48,38 +49,87 @@ export default function ContactUsPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const cardLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15 },
+    },
+  };
+
+  const cardUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.2 },
+    },
+  };
+
+  const cardRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.4 },
+    },
+  };
+
   return (
     <main>
       <Header />
 
       {/* HERO SECTION */}
+      <motion.div
+        className="flex flex-col text-white"
+        variants={cardUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <section className="w-full flex justify-center py-16">
+          <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
+            {/* Heading */}
+            <h1 className="text-[35px] font-bold text-[#004188] text-center">
+              Get In Touch Today
+            </h1>
 
-      <section className="w-full flex justify-center py-16">
-        <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
-          {/* Heading */}
-          <h1 className="text-[35px] font-bold text-[#004188] text-center">
-            Get In Touch Today
-          </h1>
-
-          {/* Typewriter Text */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text}
-            <span className="animate-pulse">|</span>
-          </h2>
-        </div>
-      </section>
-
+            {/* Typewriter Text */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text}
+              <span className="animate-pulse">|</span>
+            </h2>
+          </div>
+        </section>
+      </motion.div>
       {/* CONTACT FORM SECTION */}
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-6">
-          {/* Heading */}
-          <h2 className="text-[35px] font-bold text-[#004188] text-center">
-            Send Us A Message
-          </h2>
+          <motion.div
+            className="flex flex-col text-white"
+            variants={cardLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Heading */}
+            <h2 className="text-[35px] font-bold text-[#004188] text-center">
+              Send Us A Message
+            </h2>
+          </motion.div>
 
           {/* Contact Form Component */}
           <div className="w-full mt-6">
-            <ContactForm />
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <ContactForm />
+            </motion.div>
           </div>
         </div>
       </section>

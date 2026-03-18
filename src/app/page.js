@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   const words = [
@@ -104,6 +105,13 @@ export default function Home() {
     },
   };
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main>
       <Header />
@@ -148,13 +156,22 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col mt-8 gap-4 items-center">
-              <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+              <button
+                onClick={() => scrollToSection("what-we-do")}
+                className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300"
+              >
                 WHAT WE DO
               </button>
-              <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+              <button
+                onClick={() => scrollToSection("who-we-are")}
+                className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300"
+              >
                 WHO WE ARE
               </button>
-              <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+              <button
+                onClick={() => scrollToSection("how-it-works")}
+                className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300"
+              >
                 HOW IT WORKS
               </button>
             </div>
@@ -164,7 +181,10 @@ export default function Home() {
 
       {/* WHAT WE DO SECTION */}
 
-      <section className="w-full bg-[#014188] py-20 flex justify-center">
+      <section
+        id="what-we-do"
+        className="w-full bg-[#014188] py-20 flex justify-center"
+      >
         <div className="w-[90%] lg:w-[80%]">
           {/* Heading */}
 
@@ -322,7 +342,10 @@ export default function Home() {
       </section>
 
       {/* WHO WE ARE SECTION */}
-      <section className="w-full bg-white py-20 flex justify-center">
+      <section
+        id="who-we-are"
+        className="w-full bg-white py-20 flex justify-center"
+      >
         <div className="w-[90%] lg:w-[70%] text-center">
           {/* Heading */}
           <motion.div
@@ -349,7 +372,10 @@ export default function Home() {
       </section>
 
       {/* HOW TO WORK WITH US SECTION */}
-      <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
+      <section
+        id="how-it-works"
+        className="w-full bg-[#f6fafd] py-20 flex justify-center"
+      >
         <div className="w-[90%] lg:w-[80%]">
           {/* Heading */}
           <motion.div
@@ -431,40 +457,40 @@ export default function Home() {
       </section>
 
       {/* CTA SECTION */}
-     <motion.section
-  className="w-full bg-[#0858af] py-20 flex justify-center"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
->
-  <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
-    
-    {/* LEFT COL */}
-    <motion.div
-      className="text-white text-center lg:text-left lg:w-2/3"
-      variants={cardUp} // yeh wahi variant use ho raha hai jo cardUp tha
-    >
-      <h2 className="text-4xl font-bold mb-4">
-        We’re Waiting To Help You
-      </h2>
-      <p className="text-[16px] lg:text-[18px] leading-relaxed">
-        Get in touch with us today and let’s start transforming your
-        business from the ground up.
-      </p>
-    </motion.div>
+      <motion.section
+        className="w-full bg-[#0858af] py-20 flex justify-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
+          {/* LEFT COL */}
+          <motion.div
+            className="text-white text-center lg:text-left lg:w-2/3"
+            variants={cardUp}
+          >
+            <h2 className="text-4xl font-bold mb-4">
+              We’re Waiting To Help You
+            </h2>
+            <p className="text-[16px] lg:text-[18px] leading-relaxed">
+              Get in touch with us today and let’s start transforming your
+              business from the ground up.
+            </p>
+          </motion.div>
 
-    {/* RIGHT COL */}
-    <motion.div
-      className="lg:w-1/3 flex justify-center"
-      variants={cardUp} // same animation
-    >
-      <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
-        GET STARTED
-      </button>
-    </motion.div>
-
-  </div>
-</motion.section>
+          {/* RIGHT COL */}
+          <motion.div
+            className="lg:w-1/3 flex justify-center"
+            variants={cardUp}
+          >
+            <Link href="/shop">
+              <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
+                GET STARTED
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
       <Footer />
 
       {/* BACK TO TOP BUTTON */}

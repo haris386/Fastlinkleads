@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import {
-FaHome,
+  FaHome,
   FaCloudShowersHeavy,
   FaWind,
   FaFileSignature,
@@ -14,6 +14,8 @@ FaHome,
 } from "react-icons/fa";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function TrainingVideosPage() {
   const words = [
@@ -88,247 +90,358 @@ export default function TrainingVideosPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const cardLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15 },
+    },
+  };
+
+  const cardUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.2 },
+    },
+  };
+
+  const cardRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.4 },
+    },
+  };
+
   return (
     <main>
       <Header />
 
       {/* HERO SECTION */}
+      <motion.div
+        className="flex flex-col text-white"
+        variants={cardUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <section className="w-full flex justify-center py-16">
+          <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
+            {/* Heading */}
+            <h1 className="text-[35px] font-bold text-[#004188] text-center">
+              Training Videos
+            </h1>
 
-      <section className="w-full flex justify-center py-16">
-        <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
-          {/* Heading */}
-          <h1 className="text-[35px] font-bold text-[#004188] text-center">
-            Training Videos
-          </h1>
+            {/* Typewriter Text */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text}
+              <span className="animate-pulse">|</span>
+            </h2>
+                       <Link href="/shop">
+            <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+              GET STARTED
+            </button>
+            </Link>
 
-          {/* Typewriter Text */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text}
-            <span className="animate-pulse">|</span>
-          </h2>
-          <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
-            GET STARTED
-          </button>
-        </div>
-      </section>
-
+          </div>
+        </section>
+      </motion.div>
       {/* WHAT WE DO SECTION */}
 
-<section className="w-full bg-[#014188] py-20 flex justify-center">
-  <div className="w-[90%] lg:w-[80%]">
+      <section className="w-full bg-[#014188] py-20 flex justify-center">
+        <div className="w-[90%] lg:w-[80%]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+            {/* CARD 1 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaHome />
+                </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+                <h3 className="text-[26px] font-semibold mb-6">Roofs 411</h3>
 
-      {/* CARD 1 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-        
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaHome />
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/5cxStSUTu6E"
+                    title="Roofs 411"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+
+            {/* CARD 2 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaCloudShowersHeavy />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">
+                  Roofing Hail Inspections
+                </h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/9D9B8RVXNSo"
+                    title="Roofing Hail Inspections"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+            {/* CARD 3 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaWind />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">Wind Damage</h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/cijdJBdtLmE"
+                    title="Wind Damage"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+
+            {/* CARD 4 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaFileSignature />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">
+                  Insurance Claim Process
+                </h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/NZrgMIswXvU"
+                    title="Insurance Claim Process"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+            {/* CARD 5 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaUserCheck />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">
+                  Adjustment Appointment
+                </h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/lm5wNA3yavc"
+                    title="Adjustment Appointment"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+
+            {/* CARD 6 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaChartLine />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">
+                  Roofing Sales
+                </h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/R8zHiDBa7FU"
+                    title="Roofing Sales"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+            {/* CARD 7 */}
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
+                <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
+                  <FaHardHat />
+                </div>
+
+                <h3 className="text-[26px] font-semibold mb-6">Safety</h3>
+
+                <div className="w-full aspect-video mb-6">
+                  <iframe
+                    className="w-full h-full rounded-lg"
+                    src="https://www.youtube.com/embed/JSeasdDNS9I"
+                    title="Safety"
+                    allowFullScreen
+                  />
+                </div>
+
+                <a
+                  href="/shop"
+                  className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition"
+                >
+                  Get Started
+                </a>
+              </div>
+            </motion.div>
+          </div>
         </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Roofs 411
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/5cxStSUTu6E"
-            title="Roofs 411"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 2 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaCloudShowersHeavy />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Roofing Hail Inspections
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/9D9B8RVXNSo"
-            title="Roofing Hail Inspections"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 3 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaWind />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Wind Damage
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/cijdJBdtLmE"
-            title="Wind Damage"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 4 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaFileSignature />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Insurance Claim Process
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/NZrgMIswXvU"
-            title="Insurance Claim Process"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 5 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaUserCheck />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Adjustment Appointment
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/lm5wNA3yavc"
-            title="Adjustment Appointment"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 6 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaChartLine />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Roofing Sales
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/R8zHiDBa7FU"
-            title="Roofing Sales"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-
-      {/* CARD 7 */}
-      <div className="flex flex-col items-center text-center text-white border-4 border-[#1368c8] rounded-[10px] p-6">
-
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white text-[#014188] text-2xl mb-6">
-          <FaHardHat />
-        </div>
-
-        <h3 className="text-[26px] font-semibold mb-6">
-          Safety
-        </h3>
-
-        <div className="w-full aspect-video mb-6">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/JSeasdDNS9I"
-            title="Safety"
-            allowFullScreen
-          />
-        </div>
-
-        <a href="/contact" className="bg-[#00cb75] px-6 py-2 rounded-md font-semibold text-white hover:opacity-90 transition">
-          Get Started
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* CONTACT FORM SECTION */}
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-6">
-          {/* Heading */}
-          <h2 className="text-[35px] font-bold text-[#004188] text-center">
-            Send Us A Message
-          </h2>
-
-          {/* Typewriter Heading */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text2}
-            <span className="animate-pulse">|</span>
-          </h2>
+          <motion.div
+            className="flex flex-col text-white"
+            variants={cardLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Heading */}
+            <h2 className="text-[35px] font-bold text-[#004188] text-center">
+              Send Us A Message
+            </h2>
+            {/* Typewriter Heading */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text2}
+              <span className="animate-pulse">|</span>
+            </h2>
+          </motion.div>
 
           {/* Contact Form Component */}
           <div className="w-full mt-6">
-            <ContactForm />
+            <motion.div
+              className="flex flex-col text-white"
+              variants={cardUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <ContactForm />
+            </motion.div>
           </div>
         </div>
       </section>
       {/* CTA SECTION */}
-      <section className="w-full bg-[#0858af] py-20 flex justify-center">
+      <motion.section
+        className="w-full bg-[#0858af] py-20 flex justify-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="w-[90%] lg:w-[80%] flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* LEFT COL */}
-          <div className="text-white text-center lg:text-left lg:w-2/3">
+          <motion.div
+            className="text-white text-center lg:text-left lg:w-2/3"
+            variants={cardUp}
+          >
             <h2 className="text-4xl font-bold mb-4">
               We’re Waiting To Help You
             </h2>
@@ -336,16 +449,21 @@ export default function TrainingVideosPage() {
               Get in touch with us today and let’s start transforming your
               business from the ground up.
             </p>
-          </div>
+          </motion.div>
 
           {/* RIGHT COL */}
-          <div className="lg:w-1/3 flex justify-center">
-            <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
-              GET STARTED
-            </button>
-          </div>
+          <motion.div
+            className="lg:w-1/3 flex justify-center"
+            variants={cardUp}
+          >
+           <Link href="/shop">
+              <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
+                GET STARTED
+              </button>
+            </Link>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
 

@@ -7,6 +7,7 @@ import { supabase } from "@/lib/supabase";
 import { FaShoppingCart, FaArrowUp } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function ShopPage() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -58,26 +59,42 @@ export default function ShopPage() {
     return order === "asc" ? result : -result;
   });
 
+  const cardUp = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 70, damping: 15, delay: 0.2 },
+    },
+  };
+
   return (
     <main>
       <Header />
 
       {/* HERO */}
-      <section className="w-full flex justify-center py-16">
-        <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-4">
-          <h1 className="text-[40px] font-bold text-[#004188] text-center">
-            Packages
-          </h1>
-          <div className="text-gray-600 text-[16px]">
-            <Link href="/" className="hover:text-[#0858af]">
-              Home
-            </Link>
-            <span className="mx-2">»</span>
-            <span className="text-[#0858af] font-medium">Packages</span>
+      <motion.div
+        className="flex flex-col text-white"
+        variants={cardUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <section className="w-full flex justify-center py-16">
+          <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-4">
+            <h1 className="text-[40px] font-bold text-[#004188] text-center">
+              Packages
+            </h1>
+            <div className="text-gray-600 text-[16px]">
+              <Link href="/" className="hover:text-[#0858af]">
+                Home
+              </Link>
+              <span className="mx-2">»</span>
+              <span className="text-[#0858af] font-medium">Packages</span>
+            </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </motion.div>
       {/* PACKAGES SECTION */}
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[80%]">

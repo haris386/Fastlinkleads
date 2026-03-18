@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
-import { usePathname } from "next/navigation"; // <-- import usePathname
+import { usePathname } from "next/navigation"; 
 
 export default function Footer() {
-  const pathname = usePathname(); // current route
+  const pathname = usePathname(); 
 
   const middleLinks = [
     { name: "About", href: "/about-us" },
@@ -61,9 +61,9 @@ export default function Footer() {
         {/* RIGHT COL */}
         <div className="flex flex-col gap-3 lg:w-1/4">
           <Link
-            href="/packages"
+            href="/shop"
             className={`transition-colors duration-300 hover:text-[#0858af] ${
-              pathname === "/packages" ? "text-[#00ca72]" : ""
+              pathname === "/shop" ? "text-[#00ca72]" : ""
             }`}
           >
             Packages
