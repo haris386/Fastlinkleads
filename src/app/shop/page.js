@@ -169,7 +169,6 @@ export default function ShopPage() {
                       onClick={async () => {
                         setLoadingId(pkg.id);
 
-                        // fake delay for UX (optional but recommended)
                         await new Promise((res) => setTimeout(res, 600));
 
                         addToCart({
