@@ -36,7 +36,7 @@ export default function TermsOfUsePage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO */}

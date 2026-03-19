@@ -115,7 +115,7 @@ export default function IndustriesPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO SECTION */}

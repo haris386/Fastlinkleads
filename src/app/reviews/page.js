@@ -100,7 +100,7 @@ export default function ReviewsPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO SECTION */}

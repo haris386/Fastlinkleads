@@ -131,9 +131,11 @@ export default function CartPage() {
 
                   {/* BUTTONS */}
                   <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                    <Link href="/shop" className="w-full">
                     <button className="w-full bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
                       Update Cart
                     </button>
+                    </Link>
 
                     <Link href="/checkout" className="w-full">
                       <button className="w-full bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">

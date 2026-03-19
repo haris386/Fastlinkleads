@@ -111,7 +111,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO SECTION */}

@@ -118,7 +118,7 @@ export default function TrainingVideosPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO SECTION */}

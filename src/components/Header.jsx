@@ -5,9 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiMenu, FiX, FiShoppingCart } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useCartStore } from "@/store/cartStore";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const items = useCartStore((state) => state.items);
+
+const totalItems = items.reduce(
+  (sum, item) => sum + item.quantity,
+  0
+);  
 
   const menuItems = [
     { label: "About", href: "/about-us" },
@@ -65,9 +72,15 @@ export default function Header() {
           ))}
 
           {/* Cart Icon */}
-          <Link href="/cart">
-            <FiShoppingCart size={22} />
-          </Link>
+          <Link href="/cart" className="relative">
+  <FiShoppingCart size={22} />
+
+  {totalItems > 0 && (
+    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+      {totalItems}
+    </span>
+  )}
+</Link>
         </motion.nav>
 
         {/* Mobile Menu Button */}
@@ -97,14 +110,20 @@ export default function Header() {
               </Link>
             ))}
 
-            <Link
-              href="/cart"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 text-lg text-center"
-            >
-              <FiShoppingCart />
-              Cart
-            </Link>
+           <Link
+  href="/cart"
+  onClick={() => setMenuOpen(false)}
+  className="flex items-center gap-2 text-lg text-center relative"
+>
+  <FiShoppingCart />
+  Cart
+
+  {totalItems > 0 && (
+    <span className="absolute -top-2 right-[-20px] bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+      {totalItems}
+    </span>
+  )}
+</Link>
           </div>
         </div>
       )}

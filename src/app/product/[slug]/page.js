@@ -16,7 +16,7 @@ export default function ProductDetailPage() {
   const router = useRouter();
   const [pkg, setPkg] = useState(null);
   const [relatedPkgs, setRelatedPkgs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { items, addToCart, increment, decrement } = useCartStore();
 
   const cartItem = items.find((item) => item.id === pkg?.id);
@@ -74,7 +74,7 @@ export default function ProductDetailPage() {
     : [];
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* PACKAGE DETAIL */}
@@ -110,47 +110,58 @@ export default function ProductDetailPage() {
             </ul>
 
             {/* Quantity + Add to Cart */}
-           <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-4 mt-4">
+              {/* ➖ Quantity Controls */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => decrement(pkg.id)}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  -
+                </button>
 
-  {/* ➖ Quantity Controls */}
-  <div className="flex items-center gap-2">
-    <button
-      onClick={() => decrement(pkg.id)}
-      className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-    >
-      -
-    </button>
+                <span className="px-4 py-1 border rounded">
+                  {cartItem ? cartItem.quantity : 0}
+                </span>
 
-    <span className="px-4 py-1 border rounded">
-      {cartItem ? cartItem.quantity : 0}
-    </span>
+                <button
+                  onClick={() => increment(pkg.id)}
+                  className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  +
+                </button>
+              </div>
 
-    <button
-      onClick={() => increment(pkg.id)}
-      className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-    >
-      +
-    </button>
-  </div>
+              <button
+                onClick={async () => {
+                  setLoading(true);
 
-  {/* 🛒 Add to Cart ALWAYS visible */}
-  <button
-    onClick={() =>
-      addToCart({
-        id: pkg.id,
-        title: pkg.title,
-        price: pkg.price,
-        slug: pkg.slug,
-        image: pkg.image_url,
-      })
-    }
-    className="flex items-center gap-2 bg-[#00cb75] text-white px-6 py-3 rounded-md hover:opacity-90 transition"
-  >
-    <FaShoppingCart />
-    Add to Cart
-  </button>
+                  await new Promise((res) => setTimeout(res, 600));
 
-</div>
+                  addToCart({
+                    id: pkg.id,
+                    title: pkg.title,
+                    price: pkg.price,
+                    slug: pkg.slug,
+                    image: pkg.image_url,
+                  });
+
+                  setLoading(false);
+                  router.push("/cart");
+                }}
+                disabled={loading}
+                className="flex items-center gap-2 bg-[#00cb75] text-white px-6 py-3 rounded-md hover:opacity-90 transition disabled:opacity-70"
+              >
+                {loading ? (
+                  <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
+                ) : (
+                  <>
+                    <FaShoppingCart />
+                    Add to Cart
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </section>

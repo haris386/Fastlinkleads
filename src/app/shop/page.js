@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store/cartStore";
+import { useRouter } from "next/navigation";
 
 export default function ShopPage() {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -16,6 +17,8 @@ export default function ShopPage() {
   const [order, setOrder] = useState("asc");
   const [showCount, setShowCount] = useState(12);
   const [packages, setPackages] = useState([]);
+  const router = useRouter();
+  const [loadingId, setLoadingId] = useState(null);
 
   const addToCart = useCartStore((state) => state.addToCart);
 
@@ -72,7 +75,7 @@ export default function ShopPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO */}
@@ -163,19 +166,34 @@ export default function ShopPage() {
                   {/* Buttons Row */}
                   <div className="w-full flex justify-between items-center mt-4">
                     <button
-                      onClick={() =>
+                      onClick={async () => {
+                        setLoadingId(pkg.id);
+
+                        // fake delay for UX (optional but recommended)
+                        await new Promise((res) => setTimeout(res, 600));
+
                         addToCart({
                           id: pkg.id,
                           title: pkg.title,
                           price: pkg.price,
                           slug: pkg.slug,
                           image: pkg.image_url,
-                        })
-                      }
-                      className="flex items-center gap-2 bg-[#00cb75] text-white px-4 py-2 rounded-md hover:opacity-90 transition"
+                        });
+
+                        setLoadingId(null);
+                        router.push("/cart");
+                      }}
+                      disabled={loadingId === pkg.id}
+                      className="flex items-center gap-2 bg-[#00cb75] text-white px-4 py-2 rounded-md hover:opacity-90 transition disabled:opacity-70"
                     >
-                      <FaShoppingCart />
-                      Add to cart
+                      {loadingId === pkg.id ? (
+                        <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+                      ) : (
+                        <>
+                          <FaShoppingCart />
+                          Add to cart
+                        </>
+                      )}
                     </button>
 
                     <Link

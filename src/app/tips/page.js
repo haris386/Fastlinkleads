@@ -107,7 +107,7 @@ export default function TipsPage() {
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
 
       {/* HERO SECTION */}
