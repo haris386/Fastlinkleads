@@ -126,7 +126,7 @@ export default function IndustriesPage() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <section className="w-full flex justify-center py-16">
+        <section className="w-full flex justify-center pt-16 pb-0">
           <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
             {/* Heading */}
             <h1 className="text-[35px] font-bold text-[#004188] text-center">
@@ -148,7 +148,18 @@ export default function IndustriesPage() {
       </motion.div>
 
       {/* WHAT WE DO SECTION */}
-
+<div className="w-full overflow-hidden leading-none">
+    <svg
+      viewBox="0 0 1440 150"
+      className="w-full h-[35px] lg:h-[120px]"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0,0 C480,150 960,150 1440,0 L1440,150 L0,150 Z"
+        fill="#014188"
+      />
+    </svg>
+  </div>
       <section className="w-full bg-[#014188] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[80%]">
           {/* Grid */}

@@ -118,7 +118,7 @@ export default function Home() {
 
       {/* HERO SECTION */}
 
-      <section className="w-full flex justify-center py-16">
+      <section className="w-full flex justify-center pt-16 pb-0">
         <div className="w-[90%] lg:w-[70%] flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
           {/* LEFT COL - Slide in from left */}
           <motion.div
@@ -180,10 +180,21 @@ export default function Home() {
       </section>
 
       {/* WHAT WE DO SECTION */}
-
+      <div className="w-full overflow-hidden leading-none">
+        <svg
+          viewBox="0 0 1440 150"
+          className="w-full h-[35px] lg:h-[120px]"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0 C480,150 960,150 1440,0 L1440,150 L0,150 Z"
+            fill="#014188"
+          />
+        </svg>
+      </div>
       <section
         id="what-we-do"
-        className="w-full bg-[#014188] py-20 flex justify-center"
+        className="relative w-full bg-[#014188] py-20 flex justify-center overflow-hidden"
       >
         <div className="w-[90%] lg:w-[80%]">
           {/* Heading */}
@@ -275,8 +286,10 @@ export default function Home() {
             </motion.div>
           </div>
 
+          {/* BACKGROUND HALF CIRCLE */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-[64%] lg:top-[55%] w-[100%] lg:w-[80%] min-h-400 bg-[#014a99] rounded-full z-0"></div>
           <motion.div
-            className="flex flex-col text-white"
+            className="relative z-10 flex flex-col text-white"
             variants={cardRight}
             initial="hidden"
             whileInView="visible"

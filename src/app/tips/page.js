@@ -118,7 +118,7 @@ export default function TipsPage() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        <section className="w-full flex justify-center py-16">
+        <section className="w-full flex justify-center pt-16 pb-0">
           <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-8">
             {/* Heading */}
             <h1 className="text-[35px] font-bold text-[#004188] text-center">
@@ -130,17 +130,27 @@ export default function TipsPage() {
               {text}
               <span className="animate-pulse">|</span>
             </h2>
-                       <Link href="/shop">
-            <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
-              GET STARTED
-            </button>
+            <Link href="/shop">
+              <button className="bg-[#0e6acf] text-white px-8 py-3 rounded-md font-semibold hover:opacity-90 transition-all duration-300">
+                GET STARTED
+              </button>
             </Link>
-
           </div>
         </section>
       </motion.div>
       {/* WHAT WE DO SECTION */}
-
+      <div className="w-full overflow-hidden leading-none">
+        <svg
+          viewBox="0 0 1440 150"
+          className="w-full h-[35px] lg:h-[120px]"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0 C480,150 960,150 1440,0 L1440,150 L0,150 Z"
+            fill="#014188"
+          />
+        </svg>
+      </div>
       <section className="w-full bg-[#014188] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[80%]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
@@ -311,35 +321,35 @@ export default function TipsPage() {
       {/* CONTACT FORM SECTION */}
       <section className="w-full bg-[#f6fafd] py-20 flex justify-center">
         <div className="w-[90%] lg:w-[70%] flex flex-col items-center gap-6">
-           <motion.div
-              className="flex flex-col text-white"
-              variants={cardLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-          {/* Heading */}
-          <h2 className="text-[35px] font-bold text-[#004188] text-center">
-            Send Us A Message
-          </h2>
-          {/* Typewriter Heading */}
-          <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
-            {text2}
-            <span className="animate-pulse">|</span>
-          </h2>
-</motion.div>
+          <motion.div
+            className="flex flex-col text-white"
+            variants={cardLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {/* Heading */}
+            <h2 className="text-[35px] font-bold text-[#004188] text-center">
+              Send Us A Message
+            </h2>
+            {/* Typewriter Heading */}
+            <h2 className="text-[45px] font-semibold text-[#00ca72] text-center min-h-[60px]">
+              {text2}
+              <span className="animate-pulse">|</span>
+            </h2>
+          </motion.div>
 
           {/* Contact Form Component */}
           <div className="w-full mt-6">
-           <motion.div
+            <motion.div
               className="flex flex-col text-white"
               variants={cardUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-            <ContactForm />
-          </motion.div>
+              <ContactForm />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -354,7 +364,7 @@ export default function TipsPage() {
           {/* LEFT COL */}
           <motion.div
             className="text-white text-center lg:text-left lg:w-2/3"
-            variants={cardUp} 
+            variants={cardUp}
           >
             <h2 className="text-4xl font-bold mb-4">
               We’re Waiting To Help You
@@ -368,7 +378,7 @@ export default function TipsPage() {
           {/* RIGHT COL */}
           <motion.div
             className="lg:w-1/3 flex justify-center"
-            variants={cardUp} 
+            variants={cardUp}
           >
             <Link href="/shop">
               <button className="bg-white text-[#0858af] px-8 py-3 rounded-md font-semibold transition-all duration-300 hover:bg-[#0858af] hover:text-white border-2 border-white">
